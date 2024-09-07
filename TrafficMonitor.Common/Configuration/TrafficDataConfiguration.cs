@@ -12,6 +12,11 @@ namespace TrafficMonitor.Common.Configuration
                 .HasIndex(o => o.Id)
                 .IsUnique();
             builder.HasKey(o => o.Id);
+
+            builder.Property(o => o.Timestamp).IsRowVersion();
+            builder.Property(o=> o.CreatedOn)
+                .HasConversion(v=>v,d=>DateTime.SpecifyKind(d!.Value, DateTimeKind.Utc));
+            builder.Property(O => O.Direction).HasConversion<string>();
               
 
         }
