@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35122.118
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrafficMonitor.API", "TrafficMonitor.API\TrafficMonitor.API.csproj", "{C5A3C61B-FE03-476B-8245-6547E53A38CE}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrafficMonitorAPI.Dtos", "TrafficMonitorAPI.Dtos\TrafficMonitorAPI.Dtos.csproj", "{5567510D-68E5-4C5E-B5B5-705B345D5EDB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrafficMonitor.Common", "TrafficMonitor.Common\TrafficMonitor.Common.csproj", "{2FE1B8DC-A978-464A-8BDD-402447A1E123}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrafficMonitor.BusinessLayer", "TrafficMonitor.BusinessLayer\TrafficMonitor.BusinessLayer.csproj", "{7AF67FC4-FFB4-449E-B238-3D8E9F45F4F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrafficMonitor.API", "TrafficMonitor.API\TrafficMonitor.API.csproj", "{4C573735-E5A9-4E22-AFD5-1BE2C01C2A62}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C5A3C61B-FE03-476B-8245-6547E53A38CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C5A3C61B-FE03-476B-8245-6547E53A38CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C5A3C61B-FE03-476B-8245-6547E53A38CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C5A3C61B-FE03-476B-8245-6547E53A38CE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5567510D-68E5-4C5E-B5B5-705B345D5EDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5567510D-68E5-4C5E-B5B5-705B345D5EDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5567510D-68E5-4C5E-B5B5-705B345D5EDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -33,6 +29,10 @@ Global
 		{7AF67FC4-FFB4-449E-B238-3D8E9F45F4F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7AF67FC4-FFB4-449E-B238-3D8E9F45F4F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7AF67FC4-FFB4-449E-B238-3D8E9F45F4F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C573735-E5A9-4E22-AFD5-1BE2C01C2A62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C573735-E5A9-4E22-AFD5-1BE2C01C2A62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C573735-E5A9-4E22-AFD5-1BE2C01C2A62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C573735-E5A9-4E22-AFD5-1BE2C01C2A62}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

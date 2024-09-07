@@ -1,5 +1,8 @@
+
 using Microsoft.EntityFrameworkCore;
+using TrafficMonitor.BusinessLayer.Services;
 using TrafficMonitor.Common;
+using TrafficMonitoring.BusinessLayer.Services;
 
 namespace TrafficMonitor.API
 {
@@ -8,15 +11,16 @@ namespace TrafficMonitor.API
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            // Add services to the container.
-
+         
+           
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-            builder.Services.AddDbContext<TrafficMonitorDataContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+
+            builder.Services.AddDbContext<TrafficMonitorDataContext>(options =>
+               options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
             builder.Services.AddStackExchangeRedisCache(options =>
             {
                 options.Configuration = "127.0.0.1:6379";
@@ -30,6 +34,11 @@ namespace TrafficMonitor.API
                 };
             });
             builder.Services.AddAutoMapper(typeof(Program));
+
+
+            // Add services to the container.
+            builder.Services.AddTransient<ITrafficDataService, TrafficDataService>();
+
 
             var app = builder.Build();
 
