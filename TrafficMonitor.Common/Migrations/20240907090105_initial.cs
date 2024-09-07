@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TrafficMonitor.Common.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,9 +16,10 @@ namespace TrafficMonitor.Common.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Timestamp = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Timestamp = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -34,11 +35,11 @@ namespace TrafficMonitor.Common.Migrations
                     Location_Latitude = table.Column<double>(type: "float", nullable: false),
                     Location_Longitude = table.Column<double>(type: "float", nullable: false),
                     RoadName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Direction = table.Column<int>(type: "int", nullable: true),
+                    Direction = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     FlowRate = table.Column<double>(type: "float", nullable: true),
                     VehicleSpeed = table.Column<double>(type: "float", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Timestamp = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
+                    Timestamp = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -52,9 +53,21 @@ namespace TrafficMonitor.Common.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_EagleBot_Id",
+                table: "EagleBot",
+                column: "Id",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_TrafficData_EagleBotId",
                 table: "TrafficData",
                 column: "EagleBotId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TrafficData_Id",
+                table: "TrafficData",
+                column: "Id",
+                unique: true);
         }
 
         /// <inheritdoc />

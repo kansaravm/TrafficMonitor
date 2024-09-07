@@ -12,8 +12,8 @@ using TrafficMonitor.Common;
 namespace TrafficMonitor.Common.Migrations
 {
     [DbContext(typeof(TrafficMonitorDataContext))]
-    [Migration("20240907063810_Initial")]
-    partial class Initial
+    [Migration("20240907090105_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,19 +31,27 @@ namespace TrafficMonitor.Common.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("Created")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("Timestamp")
-                        .HasColumnType("varbinary(max)");
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
 
                     b.HasKey("Id");
 
-                    b.ToTable("EagleBot");
+                    b.HasIndex("Id")
+                        .IsUnique();
+
+                    b.ToTable("EagleBot", (string)null);
                 });
 
             modelBuilder.Entity("TrafficMonitor.Common.Models.TrafficData", b =>
@@ -55,8 +63,8 @@ namespace TrafficMonitor.Common.Migrations
                     b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("Direction")
-                        .HasColumnType("int");
+                    b.Property<string>("Direction")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("EagleBotId")
                         .HasColumnType("uniqueidentifier");
@@ -68,7 +76,9 @@ namespace TrafficMonitor.Common.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("Timestamp")
-                        .HasColumnType("varbinary(max)");
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
 
                     b.Property<double?>("VehicleSpeed")
                         .HasColumnType("float");
@@ -77,7 +87,10 @@ namespace TrafficMonitor.Common.Migrations
 
                     b.HasIndex("EagleBotId");
 
-                    b.ToTable("TrafficData");
+                    b.HasIndex("Id")
+                        .IsUnique();
+
+                    b.ToTable("TrafficData", (string)null);
                 });
 
             modelBuilder.Entity("TrafficMonitor.Common.Models.TrafficData", b =>

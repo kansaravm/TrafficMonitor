@@ -7,3 +7,9 @@ public enum Direction
     NorthEast,
     SouthWest
 }
+
+public enum Status
+{
+    Active,
+    InActive
+}
