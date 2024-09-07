@@ -15,10 +15,12 @@ namespace TrafficMonitor.BusinessLayer.Services
             _context = context;
             _logger = logger;
         }
-        public async Task CreateTrafficData(TrafficData request)
+        public async Task<bool> CreateTrafficData(TrafficData request)
         {
-            await _context.TrafficData.AddAsync(request);
+            await _context.TrafficData
+                .AddAsync(request);
             await _context.SaveChangesAsync();
+            return true;
         }
 
         public async Task<List<TrafficData>> GetTrafficData()

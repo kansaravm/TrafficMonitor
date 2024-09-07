@@ -9,7 +9,6 @@ namespace TrafficMonitor.Common.Models
 
         public Status Status { get; set; }
         public DateTime? CreatedOn { get; set; }
-        public List<TrafficData> TrafficData { get; set; } = new();
-        
+               
     }
 }

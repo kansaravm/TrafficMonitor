@@ -93,12 +93,12 @@ namespace TrafficMonitor.Common.Migrations
             modelBuilder.Entity("TrafficMonitor.Common.Models.TrafficData", b =>
                 {
                     b.HasOne("TrafficMonitor.Common.Models.EagleBot", "EagleBot")
-                        .WithMany("TrafficData")
+                        .WithMany()
                         .HasForeignKey("EagleBotId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("Coordinate", "Location", b1 =>
+                    b.OwnsOne("TrafficMonitor.Common.Models.TrafficData.Location#Coordinate", "Location", b1 =>
                         {
                             b1.Property<Guid>("TrafficDataId")
                                 .HasColumnType("uniqueidentifier");
@@ -111,7 +111,7 @@ namespace TrafficMonitor.Common.Migrations
 
                             b1.HasKey("TrafficDataId");
 
-                            b1.ToTable("TrafficData");
+                            b1.ToTable("TrafficData", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("TrafficDataId");
@@ -121,11 +121,6 @@ namespace TrafficMonitor.Common.Migrations
 
                     b.Navigation("Location")
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("TrafficMonitor.Common.Models.EagleBot", b =>
-                {
-                    b.Navigation("TrafficData");
                 });
 #pragma warning restore 612, 618
         }

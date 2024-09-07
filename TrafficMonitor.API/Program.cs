@@ -37,7 +37,9 @@ namespace TrafficMonitor.API
 
 
             // Add services to the container.
-            builder.Services.AddTransient<ITrafficDataService, TrafficDataService>();
+            builder.Services.AddScoped<IEagleBotService, EagleBotService>();
+            builder.Services.AddScoped<ITrafficDataService, TrafficDataService>();
+            builder.Services.AddTransient<IProductService, ProductService>();
 
 
             var app = builder.Build();

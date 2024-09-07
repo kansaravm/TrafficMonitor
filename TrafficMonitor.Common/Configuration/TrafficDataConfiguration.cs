@@ -16,7 +16,7 @@ namespace TrafficMonitor.Common.Configuration
             builder.Property(o => o.Timestamp).IsRowVersion();
             builder.Property(o=> o.CreatedOn)
                 .HasConversion(v=>v,d=>DateTime.SpecifyKind(d!.Value, DateTimeKind.Utc));
-            builder.Property(O => O.Direction).HasConversion<string>();
+            //builder.Property(O => O.Direction).HasConversion<string>();
               
 
         }

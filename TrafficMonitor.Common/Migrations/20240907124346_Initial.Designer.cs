@@ -12,8 +12,8 @@ using TrafficMonitor.Common;
 namespace TrafficMonitor.Common.Migrations
 {
     [DbContext(typeof(TrafficMonitorDataContext))]
-    [Migration("20240907090105_initial")]
-    partial class initial
+    [Migration("20240907124346_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -96,7 +96,7 @@ namespace TrafficMonitor.Common.Migrations
             modelBuilder.Entity("TrafficMonitor.Common.Models.TrafficData", b =>
                 {
                     b.HasOne("TrafficMonitor.Common.Models.EagleBot", "EagleBot")
-                        .WithMany("TrafficData")
+                        .WithMany()
                         .HasForeignKey("EagleBotId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -124,11 +124,6 @@ namespace TrafficMonitor.Common.Migrations
 
                     b.Navigation("Location")
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("TrafficMonitor.Common.Models.EagleBot", b =>
-                {
-                    b.Navigation("TrafficData");
                 });
 #pragma warning restore 612, 618
         }
