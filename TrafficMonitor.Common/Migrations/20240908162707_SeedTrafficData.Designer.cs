@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TrafficMonitor.Common;
@@ -11,9 +12,11 @@ using TrafficMonitor.Common;
 namespace TrafficMonitor.Common.Migrations
 {
     [DbContext(typeof(TrafficMonitorDataContext))]
-    partial class TrafficMonitorDataContextModelSnapshot : ModelSnapshot
+    [Migration("20240908162707_SeedTrafficData")]
+    partial class SeedTrafficData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

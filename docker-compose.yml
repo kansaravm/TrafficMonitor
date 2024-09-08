@@ -1,0 +1,32 @@
+version: '3.4'
+
+services:
+  trafficmonitor.api:
+    image: ${DOCKER_REGISTRY-}trafficmonitorapi
+    build:
+      context: .
+      dockerfile: TrafficMonitor.API/Dockerfile
+    ports:
+    - "5000:5000"
+    - "5001:5001"
+
+  trafficmonitor.database:
+    image : postgres:latest
+    container_name: trafficmonitor.database
+    environment:
+        - POSTGRES_DB=trafficmonitor
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=postgres
+    volumes:
+    - ./.containers/trafficmonitor-db:/var/lib/postgresql/data
+    ports:    
+    - 5432:5432
+  
+  trafficmonitor.cache:
+    image: redis:latest
+    restart: always
+    ports:
+      - '6379:6379'
+  
+
+

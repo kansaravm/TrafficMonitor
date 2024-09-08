@@ -9,6 +9,7 @@ using System.Reflection;
 using TrafficMonitor.Common.Models.SeedWork;
 using TrafficMonitor.Infrastructure.Services;
 using TrafficMonitor.Infrastructure.Abstractions;
+using TrafficMonitor.Common.Extensions;
 
 
 namespace TrafficMonitor.API
@@ -35,8 +36,12 @@ namespace TrafficMonitor.API
 
         });
 
+            //builder.Services.AddDbContext<TrafficMonitorDataContext>(options =>
+            //   options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
             builder.Services.AddDbContext<TrafficMonitorDataContext>(options =>
-               options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+               options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
            
             builder.Services.AddAutoMapper(typeof(Program));
 
@@ -56,6 +61,7 @@ namespace TrafficMonitor.API
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
+                app.ApplyMigrations();
             }
 
             app.UseHttpsRedirection();

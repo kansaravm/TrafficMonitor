@@ -14,6 +14,7 @@ namespace TrafficMonitor.Common
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+           
         }
         public virtual DbSet<TrafficData> TrafficData { get; set; } 
         public  DbSet<EagleBot> EagleBot { get; set; }
