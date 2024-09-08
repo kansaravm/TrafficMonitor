@@ -58,7 +58,7 @@ namespace TrafficMonitor.API.Controllers
         [HttpGet]
         public async Task<ActionResult<TrafficDataList>> GetAllTrafficData([FromQuery]GetTrafficFilterDto request)
         {
-            var trafficData = await _trafficService.GetTrafficData(_mapper.Map<GetTrafficFilter>(request));
+            var trafficData = await _trafficService.GetTrafficData(_mapper.Map<GetTrafficFilter>(request));            
             var response = _mapper.Map<TrafficDataList>(trafficData);
             return Ok(response);
 

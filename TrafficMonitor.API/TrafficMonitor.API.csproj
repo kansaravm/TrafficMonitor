@@ -18,6 +18,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="8.0.8" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.20.1" />
+    <PackageReference Include="StackExchange.Redis" Version="2.8.12" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     <PackageReference Include="NSwag.Annotations" Version="14.1.0" />
     <PackageReference Include="NSwag.Core" Version="14.1.0" />
@@ -34,6 +35,7 @@
   <ItemGroup>
     <ProjectReference Include="..\TrafficMonitor.BusinessLayer\TrafficMonitor.BusinessLayer.csproj" />
     <ProjectReference Include="..\TrafficMonitor.Common\TrafficMonitor.Common.csproj" />
+    <ProjectReference Include="..\TrafficMonitor.Infrastructure\TrafficMonitor.Infrastructure.csproj" />
     <ProjectReference Include="..\TrafficMonitorAPI.Dtos\TrafficMonitorAPI.Dtos.csproj" />
   </ItemGroup>
 
