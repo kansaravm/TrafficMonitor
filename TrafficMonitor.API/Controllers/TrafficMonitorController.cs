@@ -5,7 +5,6 @@ using System.Net;
 using TrafficMonitor.Common.Models;
 using TrafficMonitorAPI.Dtos;
 using TrafficMonitoring.BusinessLayer.Services;
-using X.PagedList;
 
 namespace TrafficMonitor.API.Controllers
 {
@@ -26,7 +25,7 @@ namespace TrafficMonitor.API.Controllers
         }
 
         /// <summary>
-        /// Create an TrafficData record
+        /// Create a TrafficData record
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>

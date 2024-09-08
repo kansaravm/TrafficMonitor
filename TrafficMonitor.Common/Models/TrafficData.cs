@@ -1,4 +1,3 @@
-using Azure.Core;
 using TrafficMonitor.Common.DomainEvents;
 using TrafficMonitor.Common.Models.SeedWork;
 
@@ -16,7 +15,7 @@ namespace TrafficMonitor.Common.Models
         //public Status Status { get; set; }
         public DateTime? CreatedOn { get; set; }
 
-        public static TrafficData Create(Guid eagleBotId,Coordinate location,string roadName,string direction,double flowRate,double vehicleSpeed,IClock clock)
+        public static TrafficData Create(Guid eagleBotId,Coordinate location,string? roadName,string? direction,double? flowRate,double? vehicleSpeed,IClock clock)
         {
             var trafficData = new TrafficData
             {

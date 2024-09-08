@@ -25,8 +25,8 @@ namespace TrafficMonitor.BusinessLayer.Services
         }
         public async Task CreateTrafficData(TrafficData request)
         {
-           // var traffiData = TrafficData.Create(request.EagleBotId, request.Location, request.RoadName, request.Direction, request.FlowRate, request.VehicleSpeed, _clock);
-            await _context.TrafficData.AddAsync(request);
+            var traffiData = TrafficData.Create(request.EagleBotId, request.Location, request.RoadName, request.Direction, request.FlowRate, request.VehicleSpeed, _clock);
+            await _context.TrafficData.AddAsync(traffiData);
             await _context.SaveChangesAsync();
            
         }
@@ -40,9 +40,15 @@ namespace TrafficMonitor.BusinessLayer.Services
         {
             var query = _context.TrafficData.AsQueryable();
             if (filter.HasEagleBotId())
-                query = query.Where(r => r.EagleBotId == filter.EagleBotId);
-            return await query.AsSplitQuery().
-            OrderByDescending(r => r.CreatedOn).ToPagedListAsync(filter.PageNumber, filter.PageSize);
+                query = query.Where(r => r.EagleBotId == filter.EagleBotId).OrderByDescending(r => r.CreatedOn);
+
+            var totalRowCount= await query.CountAsync();
+            var currentPage= await query.ToPagedListAsync(filter.PageNumber, filter.PageSize);
+            return new StaticPagedList<TrafficData>(
+                currentPage,
+                filter.PageNumber,
+                filter.PageSize,
+                totalRowCount);
         }
 
        

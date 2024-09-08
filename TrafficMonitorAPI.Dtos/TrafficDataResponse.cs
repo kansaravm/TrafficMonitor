@@ -8,7 +8,7 @@
         public string? Direction { get; set; }
         public double? FlowRate { get; set; }
         public double? VehicleSpeed { get; set; }
-       // public TrafficDataResponse() { }
+      
     }
 
 }
