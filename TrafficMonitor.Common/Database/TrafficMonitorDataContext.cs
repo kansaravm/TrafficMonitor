@@ -15,9 +15,8 @@ namespace TrafficMonitor.Common
         {
            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
-        public  DbSet<TrafficData> TrafficData { get; set; } 
+        public virtual DbSet<TrafficData> TrafficData { get; set; } 
         public  DbSet<EagleBot> EagleBot { get; set; }
-        public DbSet<Product> Products { get; set; }
 
     }
 }
