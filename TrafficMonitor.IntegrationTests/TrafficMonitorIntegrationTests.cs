@@ -26,8 +26,8 @@ namespace TrafficMonitor.IntegrationTests
         {
             // Arrange
             var client = _factory.CreateClient();
-            var botId = Guid.NewGuid();
-            var newBot = Builder<EagleBot>.CreateNew().With(e => e.Id = botId).Build();
+            var newId = Guid.NewGuid();
+            var newBot = Builder<EagleBot>.CreateNew().With(e => e.Id = newId).Build();
 
             using (var scope = _factory.Services.CreateScope())
             {
@@ -38,7 +38,7 @@ namespace TrafficMonitor.IntegrationTests
                 await dbContext.SaveChangesAsync();
             }
           
-            var request = Builder<CreateTrafficDataRequest>.CreateNew().With(r=>r.EagleBotId= botId).Build();
+            var request = Builder<CreateTrafficDataRequest>.CreateNew().With(r=>r.EagleBotId= newId).Build();
 
             var requestContent = new StringContent(
                 JsonSerializer.Serialize(request),
