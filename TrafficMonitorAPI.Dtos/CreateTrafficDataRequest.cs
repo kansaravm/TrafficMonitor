@@ -4,7 +4,7 @@
     /// <summary>
     /// TrafficRequest
     /// </summary>
-    public class TrafficDataRequestDto
+    public class CreateTrafficDataRequest
     {
         /// <summary>
         /// EagleBotId

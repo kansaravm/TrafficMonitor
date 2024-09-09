@@ -9,7 +9,7 @@ namespace TrafficMonitor.Mappings
     {
         public Mappings()
         {
-            CreateMap<TrafficDataRequestDto, TrafficData>()
+            CreateMap<CreateTrafficDataRequest, TrafficData>()
                 .ForPath(dest => dest.Location.Latitude, opt => opt.MapFrom(src => src.Latitude))
                   .ForPath(dest => dest.Location.Longitude, opt => opt.MapFrom(src => src.Longitude));
             ;
@@ -22,17 +22,17 @@ namespace TrafficMonitor.Mappings
                 .ForPath(dest => dest.Location.Latitude, opt => opt.MapFrom(src => src.Latitude))
                 .ForPath(dest => dest.Location.Longitude, opt => opt.MapFrom(src => src.Longitude));
 
-            CreateMap<GetTrafficFilterDto, GetTrafficFilter>();
+            CreateMap<GetTrafficFilterRequest, GetTrafficFilter>();
 
-            CreateMap<IPagedList<TrafficData>, TrafficDataList>()
-                .ConstructUsing((src, dest) => new TrafficDataList
+            CreateMap<IPagedList<TrafficData>, GetTrafficDataResponse>()
+                .ConstructUsing((src, dest) => new GetTrafficDataResponse
                 {
                     Paging = dest.Mapper.Map<Paging>(src),
                     TrafficDataResponses = dest.Mapper.Map<List<TrafficDataResponse>>(src)
                 });
 
            
-            CreateMap<IPagedList<TrafficData>, TrafficDataList>()
+            CreateMap<IPagedList<TrafficData>, GetTrafficDataResponse>()
                .ForMember(dest => dest.Paging, opt => opt.MapFrom(src => new Paging()
                {
                    PageSize = src.PageSize,

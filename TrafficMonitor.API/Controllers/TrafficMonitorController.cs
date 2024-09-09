@@ -36,7 +36,7 @@ namespace TrafficMonitor.API.Controllers
         [OpenApiOperation("create-traffic-data")]
         [SwaggerResponse(HttpStatusCode.NotFound, typeof(string), Description = "No Eagle Bot Found for the given Id.")]
        
-        public async Task<IActionResult> CreateTrafficData([FromBody] TrafficDataRequestDto request)
+        public async Task<IActionResult> CreateTrafficData([FromBody] CreateTrafficDataRequest request)
         {
             var bot = await _botService.GetEagleBot(request.EagleBotId);
             if (bot == null) return NotFound("No Eagle Bot Found for the given Id.");                   
@@ -51,10 +51,10 @@ namespace TrafficMonitor.API.Controllers
         /// <param name="request">GetTrafficFilterDto</param>
         /// <returns>TrafficDataList</returns>
         [HttpGet]
-        public async Task<ActionResult<TrafficDataList>> GetAllTrafficData([FromQuery]GetTrafficFilterDto request)
+        public async Task<ActionResult<GetTrafficDataResponse>> GetAllTrafficData([FromQuery]GetTrafficFilterRequest request)
         {
             var trafficData = await _trafficService.GetTrafficData(_mapper.Map<GetTrafficFilter>(request));            
-            var response = _mapper.Map<TrafficDataList>(trafficData);
+            var response = _mapper.Map<GetTrafficDataResponse>(trafficData);
             return Ok(response);
 
         }

@@ -1,6 +1,6 @@
 ﻿namespace TrafficMonitorAPI.Dtos
 {
-    public class GetTrafficFilterDto
+    public class GetTrafficFilterRequest
     {
         public Guid? EagleBotId { get; init; }       
         //public string? Status { get; set; }
