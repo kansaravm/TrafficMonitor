@@ -5,6 +5,7 @@ using TrafficMonitor.Common;
 using TrafficMonitor.Common.Models;
 using TrafficMonitor.Common.Models.SeedWork;
 using TrafficMonitor.Infrastructure.Abstractions;
+using TrafficMonitor.Infrastructure.Abstractions.EventBus;
 using TrafficMonitoring.BusinessLayer.Services;
 using X.PagedList;
 
@@ -17,8 +18,9 @@ namespace TrafficMonitor.BusinessLayer.Services
         public ILogger<TrafficDataService> _logger;
         private readonly ICacheService _cacheService;
         private readonly IClock _clock;
+        private readonly IEventBus _eventBus;
 
-        public TrafficDataService(TrafficMonitorDataContext context, ILogger<TrafficDataService> logger,ICacheService cacheService,IClock clock)
+        public TrafficDataService(TrafficMonitorDataContext context, ILogger<TrafficDataService> logger,ICacheService cacheService,IClock clock,IEventBus eventbus)
         {
             _context = context;
             _logger = logger;
@@ -29,7 +31,8 @@ namespace TrafficMonitor.BusinessLayer.Services
         {
             var trafficData = TrafficData.Create(request.EagleBotId, request.Location, request.RoadName, request.Direction, request.FlowRate, request.VehicleSpeed, _clock);
             await _context.TrafficData.AddAsync(trafficData);
-            await _context.SaveChangesAsync();  
+            await _context.SaveChangesAsync();
+            await _eventBus.PublishAsync(new TraffficStatusEvent { EagleBotId=trafficData.EagleBotId,RoadName=trafficData.RoadName!,Status=trafficData.Status},default);
           
         }
 

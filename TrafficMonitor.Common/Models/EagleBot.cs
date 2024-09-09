@@ -5,8 +5,7 @@ namespace TrafficMonitor.Common.Models
 {
     public class EagleBot :Entity
     {     
-        public string? Name { get; set; }      
-
+        public string? Name { get; set; } 
         public Status Status { get; set; }
         public DateTime? CreatedOn { get; set; }
                

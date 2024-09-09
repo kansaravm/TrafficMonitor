@@ -10,6 +10,10 @@ using TrafficMonitor.Common.Models.SeedWork;
 using TrafficMonitor.Infrastructure.Services;
 using TrafficMonitor.Infrastructure.Abstractions;
 using TrafficMonitor.Common.Extensions;
+using TrafficMonitor.Infrastructure.OptionClass;
+using MassTransit;
+using TrafficMonitor.Infrastructure.Abstractions.EventBus;
+using TrafficMonitor.Infrastructure.Consumers;
 
 
 namespace TrafficMonitor.API
@@ -39,7 +43,26 @@ namespace TrafficMonitor.API
             builder.Services.AddDbContext<TrafficMonitorDataContext>(options =>
                options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-           
+            builder.Services.Configure<MessageBrokerSettings>(builder.Configuration.GetSection("MessageBroker"));
+            builder.Services.AddSingleton(o=>o.GetRequiredService<MessageBrokerSettings>());
+            
+            builder.Services.AddMassTransit(busConfigurator =>
+            {
+                busConfigurator.SetKebabCaseEndpointNameFormatter();
+
+                busConfigurator.AddConsumer<TrafficStatusConsumer>();
+                busConfigurator.UsingRabbitMq((context, configurator) =>
+                {
+                    MessageBrokerSettings settings = context.GetRequiredService<MessageBrokerSettings>();
+                    configurator.Host(new Uri(settings.Host), h =>
+                    {
+                        h.Username(settings.UserName);
+                        h.Password(settings.Password);
+                    });
+                });
+            });
+            builder.Services.AddTransient<IEventBus,EventBus>();
+
             builder.Services.AddAutoMapper(typeof(Program));
 
 
@@ -57,7 +80,7 @@ namespace TrafficMonitor.API
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
-                //app.ApplyMigrations();
+                app.ApplyMigrations();
             }
 
             app.UseHttpsRedirection();

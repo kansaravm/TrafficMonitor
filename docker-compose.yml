@@ -28,5 +28,15 @@ services:
     ports:
       - '6379:6379'
   
-
+  trafficmonitor-mq:
+    image: rabbitmq:3.11.7-management
+    container_name: TrafficMonitor.RabbitMq
+    hostname: trafficmonitor-mq
+    volumes:
+    - ./containers/queue/data/:/var/lib/eabbitmq
+    - ./.containers/queue/log/:/var/log/rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+  
 

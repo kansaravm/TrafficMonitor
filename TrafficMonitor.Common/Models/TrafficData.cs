@@ -11,8 +11,8 @@ namespace TrafficMonitor.Common.Models
         public string? Direction { get; set; } 
         public double? FlowRate { get; set; }
         public double? VehicleSpeed { get; set; }
+        public string Status { get; set; } = string.Empty;
 
-        //public Status Status { get; set; }
         public DateTime? CreatedOn { get; set; }
 
         public static TrafficData Create(Guid eagleBotId,Coordinate location,string? roadName,string? direction,double? flowRate,double? vehicleSpeed,IClock clock)
