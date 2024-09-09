@@ -29,8 +29,7 @@ namespace TrafficMonitor.BusinessLayer.Services
         {
             var traffiData = TrafficData.Create(request.EagleBotId, request.Location, request.RoadName, request.Direction, request.FlowRate, request.VehicleSpeed, _clock);
             await _context.TrafficData.AddAsync(traffiData);
-            await _context.SaveChangesAsync();
-           
+            await _context.SaveChangesAsync();           
         }
 
         public async Task<IPagedList<TrafficData>> GetTrafficData(GetTrafficFilter filter)

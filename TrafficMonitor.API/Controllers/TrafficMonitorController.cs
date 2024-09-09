@@ -27,33 +27,29 @@ namespace TrafficMonitor.API.Controllers
         /// <summary>
         /// Create a TrafficData record
         /// </summary>
-        /// <param name="request"></param>
+        /// <param name="request">TrafficDataRequestDto</param>
         /// <returns></returns>
         /// <response code="400">Bad request</response>
         /// <response code="500">Unknown Error</response>
-        /// <response code="Default">Unknown Error</response>
+        /// <response code="201">Created</response>
         /// <returns>Returns 201 Created</returns>
         [HttpPost]
-
         [OpenApiOperation("create-traffic-data")]
-        [SwaggerResponse(HttpStatusCode.Conflict, typeof(string), Description = "No Eagle Bot Found for the given Id.")]
-        //[ProducesResponseType(StatusCodes.Status200OK)]
-        //[ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-        //[ProducesResponseType(typeof(string), StatusCodes.Status409Conflict)]
-        //[ProducesDefaultResponseType(typeof(string))]
+        [SwaggerResponse(HttpStatusCode.NotFound, typeof(string), Description = "No Eagle Bot Found for the given Id.")]
+       
         public async Task<IActionResult> CreateTrafficData([FromBody] TrafficDataRequestDto request)
         {
             var bot = await _botService.GetEagleBot(request.EagleBotId);
-            if (bot == null) return Conflict("No Eagle Bot Found for the given Id.");                   
+            if (bot == null) return NotFound("No Eagle Bot Found for the given Id.");                   
           
             await _trafficService.CreateTrafficData(_mapper.Map<TrafficData>(request));
-            return Created();
+            return Created(string.Empty,null);
         }
 
         /// <summary>
         /// GetPagedTrafficData
         /// </summary>
-        /// <param name="request"></param>
+        /// <param name="request">GetTrafficFilterDto</param>
         /// <returns>TrafficDataList</returns>
         [HttpGet]
         public async Task<ActionResult<TrafficDataList>> GetAllTrafficData([FromQuery]GetTrafficFilterDto request)
