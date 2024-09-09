@@ -11,11 +11,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrafficMonitor.BusinessLaye
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrafficMonitor.API", "TrafficMonitor.API\TrafficMonitor.API.csproj", "{4C573735-E5A9-4E22-AFD5-1BE2C01C2A62}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrafficMonitor.Infrastructure", "TrafficMonitor.Infrastructure\TrafficMonitor.Infrastructure.csproj", "{FE682E8C-2B3E-4DDD-85C2-8B45604B6AE2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrafficMonitor.Infrastructure", "TrafficMonitor.Infrastructure\TrafficMonitor.Infrastructure.csproj", "{FE682E8C-2B3E-4DDD-85C2-8B45604B6AE2}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{48C63178-4486-4149-BAF5-2B134DC13F5B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrafficMonitor.UnitTests", "TrafficMonitor.UnitTests\TrafficMonitor.UnitTests.csproj", "{7B3E6671-135C-4335-8F94-BB7BD1429B3E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrafficMonitor.UnitTests", "TrafficMonitor.UnitTests\TrafficMonitor.UnitTests.csproj", "{7B3E6671-135C-4335-8F94-BB7BD1429B3E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrafficMonitor.IntegrationTests", "TrafficMonitor.IntegrationTests\TrafficMonitor.IntegrationTests.csproj", "{E4DEFF70-2B36-4409-8BB6-F00ED4DB0FD0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{7B3E6671-135C-4335-8F94-BB7BD1429B3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B3E6671-135C-4335-8F94-BB7BD1429B3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B3E6671-135C-4335-8F94-BB7BD1429B3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4DEFF70-2B36-4409-8BB6-F00ED4DB0FD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4DEFF70-2B36-4409-8BB6-F00ED4DB0FD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4DEFF70-2B36-4409-8BB6-F00ED4DB0FD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4DEFF70-2B36-4409-8BB6-F00ED4DB0FD0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
