@@ -19,8 +19,15 @@ namespace TrafficMonitor.Infrastructure.Services
             if (cachedValue is null) return null;
             T? value = JsonSerializer.Deserialize<T>(cachedValue);
             return value;
-        }       
-
+        }
+        public async Task<T> GetAsync<T>(string key, Func<Task<T>> factory, CancellationToken cancellationToken = default) where T : class
+        {
+            T? cachedValue = await GetAsync<T>(key, cancellationToken);
+            if (cachedValue is not null) return cachedValue;
+            cachedValue = await factory();
+            await SetAsync(key, cachedValue, cancellationToken);
+            return cachedValue;
+        }
         public async Task SetAsync<T>(string key, T value, CancellationToken cancellationToken = default) where T : class
         {
             string cacheValue = JsonSerializer.Serialize(value);

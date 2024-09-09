@@ -61,6 +61,19 @@ namespace TrafficMonitor.Infrastructure.Services.Tests
             Assert.Equal(serializedValue, cachedValue);
         }
 
+        [Fact]
+        public async Task GetAsyncShouldFetchFromFactoryWhenCacheIsEmpty()
+        {
+            string key = "products";
+            var expectedValue = new Product { Name = "Product3" };
+            Func<Task<Product>> factory = () => Task.FromResult(expectedValue);
+
+            var result = await _cacheService.GetAsync(key, factory);
+
+            Assert.NotNull(result);
+            Assert.Equal(expectedValue.Name, result!.Name);
+        }
+
         private class Product
         {
             public string Name { get; set; } = string.Empty;
