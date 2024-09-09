@@ -36,9 +36,6 @@ namespace TrafficMonitor.API
 
         });
 
-            //builder.Services.AddDbContext<TrafficMonitorDataContext>(options =>
-            //   options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
             builder.Services.AddDbContext<TrafficMonitorDataContext>(options =>
                options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -51,8 +48,7 @@ namespace TrafficMonitor.API
             builder.Services.AddScoped<ITrafficDataService, TrafficDataService>();
             builder.Services.AddSingleton<IClock,SystemClock>();
             builder.Services.AddSingleton<ICacheService, CacheService>();
-            builder.Services.AddDistributedMemoryCache();
-         
+            builder.Services.AddDistributedMemoryCache();         
           
             var app = builder.Build();
 

@@ -7,8 +7,7 @@ using TrafficMonitorAPI.Dtos;
 using TrafficMonitoring.BusinessLayer.Services;
 
 namespace TrafficMonitor.API.Controllers
-{
-    
+{    
     [Route("[controller]")]
     [ApiController]
     public class TrafficMonitorController : ControllerBase
