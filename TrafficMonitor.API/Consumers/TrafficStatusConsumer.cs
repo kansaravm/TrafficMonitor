@@ -1,13 +1,7 @@
 ﻿using MassTransit;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TrafficMonitor.Infrastructure.Abstractions.EventBus;
 
-namespace TrafficMonitor.Infrastructure.Consumers
+namespace TrafficMonitor.API.Consumers
 {
     public sealed class TrafficStatusConsumer : IConsumer<TraffficStatusEvent>
     {

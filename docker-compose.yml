@@ -10,6 +10,15 @@ services:
     - "5000:5000"
     - "5001:5001"
 
+  #eaglebot.api:
+  #  image: ${DOCKER_REGISTRY-}eaglebotapi
+  #  build:
+   #   context: .
+  #    dockerfile: eaglebot.API/Dockerfile
+  #  ports:
+  #  - "6000:6000"
+  #  - "6001:6001"
+
   trafficmonitor.database:
     image : postgres:latest
     container_name: trafficmonitor.database

@@ -12,14 +12,12 @@ namespace TrafficMonitor.API.Controllers
     [ApiController]
     public class TrafficMonitorController : ControllerBase
     {
-        private readonly ITrafficDataService _trafficService;
-        private readonly IEagleBotService _botService;
+        private readonly ITrafficDataService _trafficService;      
         private readonly IMapper _mapper;
 
-        public TrafficMonitorController(ITrafficDataService trafficService, IEagleBotService botService, IMapper mapper)
+        public TrafficMonitorController(ITrafficDataService trafficService, IMapper mapper)
         {
-            _trafficService = trafficService;
-            _botService = botService;
+            _trafficService = trafficService;            
             _mapper = mapper;
         }
 
@@ -34,12 +32,12 @@ namespace TrafficMonitor.API.Controllers
         /// <returns>Returns 201 Created</returns>
         [HttpPost]
         [OpenApiOperation("create-traffic-data")]
-        [SwaggerResponse(HttpStatusCode.NotFound, typeof(string), Description = "No Eagle Bot Found for the given Id.")]
+        [SwaggerResponse(HttpStatusCode.NotFound, typeof(string), Description = "Eagle Bot Not Found")]
        
         public async Task<IActionResult> CreateTrafficData([FromBody] CreateTrafficDataRequest request)
         {
-            var bot = await _botService.GetEagleBot(request.EagleBotId);
-            if (bot == null) return NotFound("No Eagle Bot Found for the given Id.");                   
+            var bot = await _trafficService.GetEagleBot(request.EagleBotId);
+            if (bot == null) return NotFound("Eagle Bot Not Found");                  
           
             await _trafficService.CreateTrafficData(_mapper.Map<TrafficData>(request));
             return Created(string.Empty,null);

@@ -9,6 +9,6 @@ namespace TrafficMonitoring.BusinessLayer.Services
         Task CreateTrafficData(TrafficData request);
         Task<IPagedList<TrafficData>> GetTrafficData(GetTrafficFilter filter);
         Task<IPagedList<TrafficData>> GetTrafficDataWithCaching(GetTrafficFilter filter, CancellationToken cancellationToken = default);
-
+        Task<EagleBot?> GetEagleBot(Guid eagleBotId);
     }
 }

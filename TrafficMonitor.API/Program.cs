@@ -13,7 +13,7 @@ using TrafficMonitor.Common.Extensions;
 using TrafficMonitor.Infrastructure.OptionClass;
 using MassTransit;
 using TrafficMonitor.Infrastructure.Abstractions.EventBus;
-using TrafficMonitor.Infrastructure.Consumers;
+using TrafficMonitor.API.Consumers;
 
 
 namespace TrafficMonitor.API
@@ -49,7 +49,7 @@ namespace TrafficMonitor.API
             builder.Services.AddMassTransit(busConfigurator =>
             {
                 busConfigurator.SetKebabCaseEndpointNameFormatter();
-
+                busConfigurator.AddConsumer<EagleBotCreatedConsumer>();
                 busConfigurator.AddConsumer<TrafficStatusConsumer>();
                 busConfigurator.UsingRabbitMq((context, configurator) =>
                 {
@@ -59,6 +59,7 @@ namespace TrafficMonitor.API
                         h.Username(settings.UserName);
                         h.Password(settings.Password);
                     });
+                    configurator.ConfigureEndpoints(context);
                 });
             });
             builder.Services.AddTransient<IEventBus,EventBus>();
@@ -67,7 +68,6 @@ namespace TrafficMonitor.API
 
 
             // Add services to the container.
-            builder.Services.AddScoped<IEagleBotService, EagleBotService>();
             builder.Services.AddScoped<ITrafficDataService, TrafficDataService>();
             builder.Services.AddSingleton<IClock,SystemClock>();
             builder.Services.AddSingleton<ICacheService, CacheService>();

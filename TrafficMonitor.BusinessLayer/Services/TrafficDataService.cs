@@ -74,5 +74,10 @@ namespace TrafficMonitor.BusinessLayer.Services
 
 
         }
+        public async Task<EagleBot?> GetEagleBot(Guid eagleBotId)
+        {
+            return await _context.EagleBot.AsNoTracking().SingleOrDefaultAsync(s => s.Id == eagleBotId);
+
+        }
     }
 }

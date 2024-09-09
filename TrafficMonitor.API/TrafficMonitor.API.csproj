@@ -37,6 +37,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj" />
     <ProjectReference Include="..\TrafficMonitor.BusinessLayer\TrafficMonitor.BusinessLayer.csproj" />
     <ProjectReference Include="..\TrafficMonitor.Common\TrafficMonitor.Common.csproj" />
     <ProjectReference Include="..\TrafficMonitor.Infrastructure\TrafficMonitor.Infrastructure.csproj" />
