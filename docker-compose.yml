@@ -10,14 +10,14 @@ services:
     - "5000:5000"
     - "5001:5001"
 
-  #eaglebot.api:
-  #  image: ${DOCKER_REGISTRY-}eaglebotapi
-  #  build:
-   #   context: .
-  #    dockerfile: eaglebot.API/Dockerfile
-  #  ports:
-  #  - "6000:6000"
-  #  - "6001:6001"
+  eaglebot.api:
+    image: ${DOCKER_REGISTRY-}eaglebotapi
+    build:
+      context: .
+      dockerfile: eaglebot.API/Dockerfile
+    ports:
+    - "6000:6000"
+    - "6001:6001"
 
   trafficmonitor.database:
     image : postgres:latest
@@ -26,8 +26,8 @@ services:
         - POSTGRES_DB=trafficmonitor
         - POSTGRES_USER=postgres
         - POSTGRES_PASSWORD=postgres
-    volumes:
-    - ./.containers/trafficmonitor-db:/var/lib/postgresql/data
+   # volumes:
+   # - ./.containers/trafficmonitor-db:/var/lib/postgresql/data
     ports:    
     - 5432:5432
   

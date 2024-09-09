@@ -11,7 +11,7 @@ using EagleBot.API.Database;
 using Serilog;
 
 
-namespace TrafficMonitor.API
+namespace EagleBot.API
 {
     public class Program
     {
