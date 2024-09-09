@@ -1,7 +1,9 @@
 Good Morning,
 
 Please use develop branch.
+
 There is a docker-compose file,its composing the two apis,rabbitMQ and postgresdb.
+
 the projects are as follows:
 1. TrafficMonitor.API : provides endpoints to create and get traffic data,started with separate project for each concern,wanted to go and create business objects for a richer domain but started on other stuff so could not finish it.    
 2. EagleBot.API : create endpoint for EagleBot,idea was to use the EagleBotCreatedEvent in EagleBot Domain and consume it in the TrafficMonitor Domain to populate the EagleBot table,using RabbitMq and MassTransit.Have most of the things in EagleApi project for this.
