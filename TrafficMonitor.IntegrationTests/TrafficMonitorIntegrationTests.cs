@@ -11,8 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace TrafficMonitor.IntegrationTests
 {
-    public class TrafficMonitorIntegrationTests : IClassFixture<CustomWebApplicationFactory<Program>>
-    {
+    public class TrafficMonitorIntegrationTests : IClassFixture<CustomWebApplicationFactory<Program>>    {
 
         private readonly WebApplicationFactory<Program> _factory;       
 
