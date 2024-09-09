@@ -14,28 +14,28 @@ namespace TrafficMonitor.UnitTests.Controllers
     {
         private readonly Mock<IMapper> _mapper;
         private readonly Mock<ITrafficDataService> _trafficService;
-        private readonly Mock<IEagleBotService> _botService;
+       
         private readonly TrafficMonitorController _controller;
 
         public TrafficMonitorControllerTests()
         {
-            _botService =new Mock<IEagleBotService> ();
+           
             _mapper = new Mock<IMapper> ();
             _trafficService = new Mock<ITrafficDataService> ();
-            _controller= new TrafficMonitorController(_trafficService.Object ,_botService.Object,_mapper.Object);
+            _controller= new TrafficMonitorController(_trafficService.Object ,_mapper.Object);
         }      
 
         [Fact]
         public async Task CreateShouldReturnNotFoundWhenBotNotFound()
         {
             var request= new CreateTrafficDataRequest() { EagleBotId = Guid.NewGuid() };
-            _botService.Setup(s => s.GetEagleBot(request.EagleBotId)).ReturnsAsync((EagleBot?)null);
+            _trafficService.Setup(s => s.GetEagleBot(request.EagleBotId)).ReturnsAsync((EagleBot?)null);
 
             var result = await _controller.CreateTrafficData(request);
 
             var actionResult = Assert.IsType<NotFoundObjectResult>(result);
 
-            Assert.Equal("No Eagle Bot Found for the given Id.",actionResult.Value);
+            Assert.Equal("Eagle Bot Not Found",actionResult.Value);
         }
 
         [Fact]
@@ -43,8 +43,8 @@ namespace TrafficMonitor.UnitTests.Controllers
         {
             var request = new CreateTrafficDataRequest() { EagleBotId = Guid.NewGuid() };
             var bot = new EagleBot { Id = request.EagleBotId };
-            var response= 
-            _botService.Setup(s => s.GetEagleBot(request.EagleBotId)).ReturnsAsync(bot);
+            var response=
+            _trafficService.Setup(s => s.GetEagleBot(request.EagleBotId)).ReturnsAsync(bot);
            
             var result = await _controller.CreateTrafficData(request);
 
