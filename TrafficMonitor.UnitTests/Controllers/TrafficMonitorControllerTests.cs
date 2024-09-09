@@ -6,7 +6,8 @@ using TrafficMonitor.API.Controllers;
 using TrafficMonitor.Common.Models;
 using TrafficMonitorAPI.Dtos;
 using TrafficMonitoring.BusinessLayer.Services;
-
+using X.PagedList;
+using FizzWare.NBuilder;
 namespace TrafficMonitor.UnitTests.Controllers
 {
     public class TrafficMonitorControllerTests
@@ -51,5 +52,55 @@ namespace TrafficMonitor.UnitTests.Controllers
 
             Assert.Equal(StatusCodes.Status201Created, actionResult.StatusCode);
         }
+
+        [Fact]
+        public async Task GetAllTrafficData_ShouldReturnOk_WhenDataIsReturned()
+        {
+            var guid1 = Guid.NewGuid();
+            var guid2 = Guid.NewGuid();
+            var guid3 = Guid.NewGuid();
+            
+            var responseDtoList = Builder<TrafficDataResponse>.CreateListOfSize(40)
+                .TheFirst(10)
+                .With(x => x.EagleBotId = guid1)
+                .TheNext(6).With(x => x.EagleBotId = guid2)
+                .TheRest().With(x => x.EagleBotId = guid3)
+                .Build();
+
+            
+            var response = Builder<TrafficDataList>.CreateNew()
+               .With(x => x.Paging = Builder<Paging>.CreateNew().Build())
+           .With(x => x.TrafficDataResponses = responseDtoList.ToList())
+           .Build();
+            
+            
+            var trafficDataList = Builder<TrafficData>.CreateListOfSize(40)
+               .TheFirst(10)
+               .With(x => x.EagleBotId = guid1)
+               .TheNext(6).With(x => x.EagleBotId = guid2)
+               .TheRest().With(x => x.EagleBotId = guid3)
+               .Build();
+
+            var pagedList = new StaticPagedList<TrafficData>(trafficDataList, pageNumber: 1, pageSize: 10, totalItemCount: 40);
+
+
+            var request = new GetTrafficFilterDto { /* Set properties */ };
+            var trafficFilter = new GetTrafficFilter { /* Set properties */ };
+            var trafficData = new TrafficData { /* Set properties */ };
+
+
+            _mapper.Setup(m => m.Map<GetTrafficFilter>(request)).Returns(trafficFilter);
+            _trafficService.Setup(s => s.GetTrafficData(trafficFilter)).ReturnsAsync(pagedList);
+            _mapper.Setup(m => m.Map<TrafficDataList>(pagedList)).Returns(response);
+
+            
+            var result = await _controller.GetAllTrafficData(request);
+
+           
+            var okResult = Assert.IsType<OkObjectResult>(result.Result);
+            var listResponse = Assert.IsType<TrafficDataList>(okResult.Value);        
+          
+        }
     }
 }
+

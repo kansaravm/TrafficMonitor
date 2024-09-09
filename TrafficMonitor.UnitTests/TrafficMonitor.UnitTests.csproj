@@ -15,6 +15,7 @@
     <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="8.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
     <PackageReference Include="Moq" Version="4.20.72" />
+    <PackageReference Include="NBuilder" Version="6.1.0" />
     <PackageReference Include="xunit" Version="2.5.3" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.5.3" />
   </ItemGroup>
@@ -24,6 +25,7 @@
     <ProjectReference Include="..\TrafficMonitor.BusinessLayer\TrafficMonitor.BusinessLayer.csproj" />
     <ProjectReference Include="..\TrafficMonitor.Common\TrafficMonitor.Common.csproj" />
     <ProjectReference Include="..\TrafficMonitor.Infrastructure\TrafficMonitor.Infrastructure.csproj" />
+    <ProjectReference Include="..\TrafficMonitorAPI.Dtos\TrafficMonitorAPI.Dtos.csproj" />
   </ItemGroup>
 
   <ItemGroup>
